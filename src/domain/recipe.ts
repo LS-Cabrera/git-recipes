@@ -2,6 +2,7 @@ export class Recipe {
   _name!: string;
   _category?: string;
   _description? : string;
+  _prepTime!: number
 
   constructor(aName: string) {
     this.name = aName;
@@ -35,7 +36,19 @@ export class Recipe {
     this._description = aDescription;
   }
 
+  get prepTime(): number {
+    return this._prepTime;
+  }
+
+  set prepTime(aPrepTime: number) {
+    if (aPrepTime < 0) {
+      throw new Error("El tiempo de preparación debe ser mayor o igual a 0.")
+    }
+    
+    this._prepTime = aPrepTime;
+  }
+
   toString(): string {
-    return `Receta: ${this.name} - categoría: ${this.category} - descripción: ${this.description}`;
+    return `Receta: ${this.name} - categoría: ${this.category} - descripción: ${this.description} - tiempo de preparación: ${this.prepTime}`;
   }
 }
